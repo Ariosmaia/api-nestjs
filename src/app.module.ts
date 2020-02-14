@@ -5,7 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 // nest generate module backoffice
 @Module({
   imports: [
-		MongooseModule.forRoot('CONNECTION_STRING'),
+		MongooseModule.forRoot('mongodb://localhost:27017/petshop', 
+			{useUnifiedTopology: true, useNewUrlParser:true}),
 		BackofficeModule
 	],
   controllers: [],
