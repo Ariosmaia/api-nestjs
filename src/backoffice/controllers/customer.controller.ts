@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
+import { Customer } from "../models/customer.model";
 
 //nest generate controller customer
 // localhost:3000/v1/customers
@@ -13,14 +14,14 @@ export class CustomerController {
 	// Dentro do metodo Http eu defino o parametro da rota
 	// Dentro do metodo getById tenho que pegar o parametro do http
 	@Get(':document')
-	getById(@Param('document') document) {
+	getById(@Param('document') document: string) {
 		return 'Obter o cliente ' + document;
 	}
 
 	// @Body para pegar os dados do que vem na requisão
 	@Post()
-	post(@Body() body) { 
-		return body; 
+	post(@Body() body: Customer) {
+		return body.name; 
 	}
 
 	// @Body para pegar os dados do que vem na requisão
@@ -33,7 +34,7 @@ export class CustomerController {
 	}
 
 	@Delete(':document')
-	delete() { 
+	delete(@Param('document') document: string) { 
 		return 'Remover um cliente'; 
 	}
 }
