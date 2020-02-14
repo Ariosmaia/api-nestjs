@@ -26,7 +26,7 @@ export class ValidatorIntercptor implements NestInterceptor {
 					this.contract.errors), HttpStatus.BAD_REQUEST);
 		}
 
-		return next.handle().pipe(map(data => ({ data })));
+		return next.handle();
 	}
 
 
