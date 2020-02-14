@@ -1,6 +1,5 @@
 import { NestInterceptor, Injectable, ExecutionContext, CallHandler, HttpException, HttpStatus } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { map } from 'rxjs/operators';
 import { Contract } from "src/backoffice/contracts/contract";
 import { Result } from "src/backoffice/models/result.model";
 
