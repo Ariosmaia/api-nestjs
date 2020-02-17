@@ -9,7 +9,7 @@ export class Customer {
 		public document: string,
 		public email: string,
 		public pets: Pet[],
-		public billinggAddress: Address,
+		public billingAddress: Address,
 		public shippingAddress: Address,
 		public creditCard: CreditCard,
 		public user: User

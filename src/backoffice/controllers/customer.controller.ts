@@ -1,12 +1,14 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors, HttpException, HttpStatus } from "@nestjs/common";
 import { Result } from "../models/result.model";
 import { ValidatorIntercptor } from "src/interceptors/validator.interceptor";
-import { CreateCustomerContract } from "../contracts/customer.contracts";
+import { CreateCustomerContract } from "../contracts/customer/create-customer.contract";
 import { CreateCustomerDto } from "../dtos/create.customer.dto";
 import { AccountService } from "../services/account.service";
 import { User } from "../models/user.model";
 import { CustommertService } from "../services/customer.service";
 import { Customer } from "../models/customer.model";
+import { Address } from "../models/address.model";
+import { CreateAddressContract } from "../contracts/address/create-address.contract";
 
 //nest generate controller customer
 // localhost:3000/v1/customers
@@ -28,7 +30,7 @@ export class CustomerController {
 	// Dentro do metodo getById tenho que pegar o parametro do http
 	@Get(':document')
 	getById(@Param('document') document: string) {
-		return new Result(null, true, {}, null);
+		return new Result(null, true, document, null);
 	}
 
 	// @Body para pegar os dados do que vem na requisão
@@ -55,6 +57,19 @@ export class CustomerController {
 		} 
 	}
 
+	@Post(':document/addresses/billing')
+	@UseInterceptors(new ValidatorIntercptor(new CreateAddressContract))
+	async addBillingAddress(@Param('document') document, @Body() model: Address){
+		try {
+			const res =  this.customerService.addBillingAddress(document, model);
+			return res;
+		} catch (error) {
+			throw new HttpException(new Result(
+				'Não foi possível adicionar seu endereço', false, null, error), 
+				HttpStatus.BAD_REQUEST)
+		}
+	}
+
 	// @Body para pegar os dados do que vem na requisão
 	@Put(':document')
 	put(@Param('document') document, @Body() body) { 
@@ -63,6 +78,6 @@ export class CustomerController {
 
 	@Delete(':document')
 	delete(@Param('document') document: string) { 
-		return new Result('Cliente removido com sucesso!', true, null, null);
+		return new Result('Cliente removido com sucesso!', true, document, null);
 	}
 }

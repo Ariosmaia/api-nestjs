@@ -9,7 +9,7 @@ export interface CustomerDocument extends Document{
 	readonly document: string,
 	readonly email: string,
 	readonly pets: PetDocument[],
-	readonly billinggAddress: AddressDocument,
+	readonly billingAddress: AddressDocument,
 	readonly shippingAddress: AddressDocument,
 	readonly creditCard: CreditCardDocument,
 	readonly user: UserDocument
