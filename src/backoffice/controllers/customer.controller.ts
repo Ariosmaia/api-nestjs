@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors, HttpException, HttpStatus } from "@nestjs/common";
 import { Result } from "../models/result.model";
 import { ValidatorIntercptor } from "src/interceptors/validator.interceptor";
 import { CreateCustomerContract } from "../contracts/customer.contracts";
@@ -35,17 +35,24 @@ export class CustomerController {
 	@Post()
 	@UseInterceptors(new ValidatorIntercptor(new CreateCustomerContract))
 	async post(@Body() model: CreateCustomerDto) {
-
-		const user = await this.accountService.create(
-			new User(model.document, model.password, true),
-		);
-
-		const customer = new Customer(
-			model.name, model.document, model.email, null, null, null, null, user);
-
-		const res = await this.customerService.create(customer);	
-
-		return new Result('Cliente criado com sucesso!', true, res, null);
+			try {
+			const user = await this.accountService.create(
+				new User(model.document, model.password, true),
+			);
+				
+			const customer = new Customer(
+				model.name, model.document, model.email, null, null, null, null, user);
+	
+			const res = await this.customerService.create(customer);	
+	
+			return new Result('Cliente criado com sucesso!', true, res, null);
+	
+		} catch (error) {
+			// Rollback manual ex.: this.accountService.remove(user.id)
+			throw new HttpException(new Result(
+				'Não foi possível realizar seu cadastro', false, null, error), 
+				HttpStatus.BAD_REQUEST);
+		} 
 	}
 
 	// @Body para pegar os dados do que vem na requisão
