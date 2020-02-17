@@ -25,4 +25,14 @@ export class CustommertService {
 		}, options)
 	}
 
+	async addShippingAddress(document: string, data: Address): Promise<Customer> {
+		// Se não existe um endereço ele cria, se existir ele irá atualizar
+		const options = { upsert: true };
+		return await this.model.findOneAndUpdate({ document}, {
+			$set: {
+				shippingAddress: data,
+			},
+		}, options)
+	}
+
 }
