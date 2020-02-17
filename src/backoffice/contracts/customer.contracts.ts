@@ -14,7 +14,7 @@ export class CreateCustomerContract implements Contract{
 		flunt.hasMinLen(model.name, 5, 'Nome inválido');
 		flunt.isEmail(model.email, 'E-mail inválido');
 		flunt.isFixedLen(model.document, 11, 'CPF inválido');
-		flunt.isFixedLen(model.password, 11, 'Senha inválida');
+		flunt.hasMinLen(model.password, 6, 'Senha inválida');
 
 		// this.errors.push({}); // return this.errors.lenth === 0;
 

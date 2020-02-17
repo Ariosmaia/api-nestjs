@@ -3,12 +3,17 @@ import { Result } from "../models/result.model";
 import { ValidatorIntercptor } from "src/interceptors/validator.interceptor";
 import { CreateCustomerContract } from "../contracts/customer.contracts";
 import { CreateCustomerDto } from "../dtos/create.customer.dto";
+import { AccountService } from "../services/account.service";
+import { User } from "../models/user.model";
 
 //nest generate controller customer
 // localhost:3000/v1/customers
 // O que eu colocar dentro do Controller vai ser o nome da rota
 @Controller('v1/customers')
 export class CustomerController {
+	
+	constructor(private readonly accountService: AccountService) {}
+
 	@Get()
 	get() {
 		return new Result(null, true, [], null);
@@ -24,8 +29,11 @@ export class CustomerController {
 	// @Body para pegar os dados do que vem na requisão
 	@Post()
 	@UseInterceptors(new ValidatorIntercptor(new CreateCustomerContract))
-	post(@Body() body: CreateCustomerDto) {
-		return new Result('Cliente criado com sucesso!', true, body, null);
+	async post(@Body() model: CreateCustomerDto) {
+		const user = await this.accountService.create(
+			new User(model.document, model.password, true));
+
+		return new Result('Cliente criado com sucesso!', true, user, null);
 	}
 
 	// @Body para pegar os dados do que vem na requisão
