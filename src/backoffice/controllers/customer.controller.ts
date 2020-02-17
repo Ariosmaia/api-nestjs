@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors, HttpE
 import { Result } from "../models/result.model";
 import { ValidatorIntercptor } from "src/interceptors/validator.interceptor";
 import { CreateCustomerContract } from "../contracts/customer/create-customer.contract";
-import { CreateCustomerDto } from "../dtos/create.customer.dto";
+import { CreateCustomerDto } from "../dtos/create-customer.dto";
 import { AccountService } from "../services/account.service";
 import { User } from "../models/user.model";
 import { CustommertService } from "../services/customer.service";
@@ -11,6 +11,7 @@ import { Address } from "../models/address.model";
 import { CreateAddressContract } from "../contracts/address/create-address.contract";
 import { CreatePetContract } from "../contracts/pet/create-pet.contract";
 import { Pet } from "../models/pet.model";
+import { QueryDto } from "../dtos/query.dto";
 
 //nest generate controller customer
 // localhost:3000/v1/customers
@@ -111,7 +112,12 @@ export class CustomerController {
 	async get(@Param('document') document){
 		const customer =  await this.customerService.find(document);
 		return new Result(null, true, customer, null);
+	}
 
+	@Post('query')
+	async query(@Body() model: QueryDto) {
+		const customers =  await this.customerService.query(model);
+		return new Result(null, true, customers, null)
 	}
 
 }

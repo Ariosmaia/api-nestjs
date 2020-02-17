@@ -5,6 +5,7 @@ import { CustomerDocument } from '../schemas/documents/customer.document';
 import { Customer } from '../models/customer.model';
 import { Address } from '../models/address.model';
 import { Pet } from '../models/pet.model';
+import { QueryDto } from '../dtos/query.dto';
 
 @Injectable()
 export class CustommertService {
@@ -68,8 +69,16 @@ export class CustommertService {
 			.exec();
 	}
 
-	// Ordenar resultado
-
-	// Query
+	async query(model: QueryDto): Promise<Customer[]> {
+		return await this.model
+			.find(model.query,
+				model.fields,
+				{
+					skip: model.skip,
+					limit: model.take,
+				})
+				.sort(model.sort)
+				.exec();
+	}
 
 }
