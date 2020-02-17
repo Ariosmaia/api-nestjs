@@ -9,6 +9,8 @@ import { CustommertService } from "../services/customer.service";
 import { Customer } from "../models/customer.model";
 import { Address } from "../models/address.model";
 import { CreateAddressContract } from "../contracts/address/create-address.contract";
+import { CreatePetContract } from "../contracts/pet/create-pet.contract";
+import { Pet } from "../models/pet.model";
 
 //nest generate controller customer
 // localhost:3000/v1/customers
@@ -80,6 +82,19 @@ export class CustomerController {
 		} catch (error) {
 			throw new HttpException(new Result(
 				'Não foi possível adicionar seu endereço', false, null, error), 
+				HttpStatus.BAD_REQUEST)
+		}
+	}
+
+	@Post(':document/pets')
+	@UseInterceptors(new ValidatorIntercptor(new CreatePetContract))
+	async createPEt(@Param('document') document, @Body() model: Pet){
+		try {
+			await this.customerService.createPet(document, model);
+			return new Result(null, true, model, null);
+		} catch (error) {
+			throw new HttpException(new Result(
+				'Não foi possível criar seu pet', false, null, error), 
 				HttpStatus.BAD_REQUEST)
 		}
 	}
