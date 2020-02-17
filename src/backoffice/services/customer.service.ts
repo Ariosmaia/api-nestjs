@@ -6,7 +6,6 @@ import { Customer } from '../models/customer.model';
 import { Address } from '../models/address.model';
 import { Pet } from '../models/pet.model';
 
-
 @Injectable()
 export class CustommertService {
 	constructor(@InjectModel("Customer") private readonly model: Model<CustomerDocument>) {}
@@ -53,7 +52,24 @@ export class CustommertService {
 				'pets.$': data,
 			}
 		});
-
 	}
+
+	async findAll(): Promise<Customer[]> {
+		return await this.model
+			.find({}, 'name email document')
+			.sort('name')
+			.exec();
+	}
+
+	async find(document): Promise<Customer> {
+		return await this.model
+			.findOne({document})
+			.populate('user', 'username')
+			.exec();
+	}
+
+	// Ordenar resultado
+
+	// Query
 
 }

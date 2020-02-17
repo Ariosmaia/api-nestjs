@@ -23,18 +23,6 @@ export class CustomerController {
 		private readonly customerService: CustommertService
 		) {}
 
-	@Get()
-	get() {
-		return new Result(null, true, [], null);
-	}
-
-	// Dentro do metodo Http eu defino o parametro da rota
-	// Dentro do metodo getById tenho que pegar o parametro do http
-	@Get(':document')
-	getById(@Param('document') document: string) {
-		return new Result(null, true, document, null);
-	}
-
 	// @Body para pegar os dados do que vem na requisão
 	@Post()
 	@UseInterceptors(new ValidatorIntercptor(new CreateCustomerContract))
@@ -112,14 +100,18 @@ export class CustomerController {
 		}
 	}
 
-	// @Body para pegar os dados do que vem na requisão
-	@Put(':document')
-	put(@Param('document') document, @Body() body) { 
-		return new Result('Cliente alterado com sucesso!', true, body, null);
+	@Get()
+	async getAll(){
+		const customers =  await this.customerService.findAll();
+		return new Result(null, true, customers, null);
+
 	}
 
-	@Delete(':document')
-	delete(@Param('document') document: string) { 
-		return new Result('Cliente removido com sucesso!', true, document, null);
+	@Get(':document')
+	async get(@Param('document') document){
+		const customer =  await this.customerService.find(document);
+		return new Result(null, true, customer, null);
+
 	}
+
 }
