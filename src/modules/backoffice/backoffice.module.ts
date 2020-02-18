@@ -6,6 +6,7 @@ import { AccountService } from './services/account.service';
 import { CustommerService } from './services/customer.service';
 import { CustomerController } from './controllers/customer.controller';
 import { AddressService } from './services/address.service';
+import { PetService } from './services/pet.service';
 
 @Module({
 	imports: [MongooseModule.forFeature([
@@ -22,7 +23,8 @@ import { AddressService } from './services/address.service';
 	providers: [
 		AccountService, 
 		AddressService,
-		CustommerService, 
+		CustommerService,
+		PetService, 
 	],
 })
 export class BackofficeModule { }
