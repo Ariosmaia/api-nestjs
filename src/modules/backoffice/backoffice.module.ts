@@ -8,6 +8,7 @@ import { CustomerController } from './controllers/customer.controller';
 import { AddressService } from './services/address.service';
 import { PetService } from './services/pet.service';
 import { AddressController } from './controllers/address.controller';
+import { PetController } from './controllers/pet.controller';
 
 @Module({
 	imports: [MongooseModule.forFeature([
@@ -22,7 +23,8 @@ import { AddressController } from './controllers/address.controller';
 	])],
 	controllers: [
 		AddressController,
-		CustomerController
+		CustomerController,
+		PetController
 	],
 	providers: [
 		AccountService, 
