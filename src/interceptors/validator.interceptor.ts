@@ -4,7 +4,7 @@ import { Contract } from "src/modules/backoffice/contracts/contract";
 import { Result } from "src/modules/backoffice/models/result.model";
 
 @Injectable()
-export class ValidatorIntercptor implements NestInterceptor {
+export class ValidatorInterceptor implements NestInterceptor {
 	constructor(public contract: Contract) {
 	}
 

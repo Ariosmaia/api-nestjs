@@ -1,6 +1,6 @@
 import { Controller, Post, Put, Param, Body, UseInterceptors, HttpException, HttpStatus } from "@nestjs/common";
 import { Result } from "../models/result.model";
-import { ValidatorIntercptor } from "src/interceptors/validator.interceptor";
+import { ValidatorInterceptor } from "src/interceptors/validator.interceptor";
 import { CreatePetContract } from "../contracts/pet/create-pet.contract";
 import { Pet } from "../models/pet.model";
 import { PetService } from "../services/pet.service";
@@ -13,7 +13,7 @@ export class PetController {
 		) {}
 
 	@Post(':document')
-	@UseInterceptors(new ValidatorIntercptor(new CreatePetContract))
+	@UseInterceptors(new ValidatorInterceptor(new CreatePetContract))
 	async createPet(@Param('document') document, @Body() model: Pet){
 		try {
 			await this.service.create(document, model);
@@ -26,7 +26,7 @@ export class PetController {
 	}
 
 	@Put(':document/:id')
-	@UseInterceptors(new ValidatorIntercptor(new CreatePetContract))
+	@UseInterceptors(new ValidatorInterceptor(new CreatePetContract))
 	async updatePet(@Param('document') document, @Param('id') id: string, @Body() model: Pet){
 		try {
 			await this.service.update(document, id, model);

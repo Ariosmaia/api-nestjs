@@ -5,6 +5,7 @@ import { CustomerDocument } from '../schemas/documents/customer.document';
 import { Customer } from '../models/customer.model';
 import { QueryDto } from '../dtos/query.dto';
 import { UpdateCustomerDto } from '../dtos/customer/update-customer.dto';
+import { CreditCard } from '../models/credit-card.model';
 
 @Injectable()
 export class CustommerService {
@@ -43,6 +44,15 @@ export class CustommerService {
 
 	async update(document: string, data: UpdateCustomerDto): Promise<Customer> {
 		return await this.model.findOneAndUpdate({ document }, data );
+	}
+
+	async saveOrUpdateCreditCard(document: string, data: CreditCard): Promise<Customer>{
+		const options = { upsert: true };
+		return await this.model.findOneAndUpdate({ document}, {
+			$set: {
+				card: data,
+			},
+		}, options);
 	}
 
 }

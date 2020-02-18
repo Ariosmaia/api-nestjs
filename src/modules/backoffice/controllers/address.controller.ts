@@ -1,6 +1,6 @@
 import { Controller, Post, Param, Body, UseInterceptors, HttpException, HttpStatus } from "@nestjs/common";
 import { Result } from "../models/result.model";
-import { ValidatorIntercptor } from "src/interceptors/validator.interceptor";
+import { ValidatorInterceptor } from "src/interceptors/validator.interceptor";
 import { Address } from "../models/address.model";
 import { CreateAddressContract } from "../contracts/address/create-address.contract";
 import { AddressService } from "../services/address.service";
@@ -14,7 +14,7 @@ export class AddressController {
 		) {}
 
 	@Post(':document/billing')
-	@UseInterceptors(new ValidatorIntercptor(new CreateAddressContract))
+	@UseInterceptors(new ValidatorInterceptor(new CreateAddressContract))
 	async addBillingAddress(@Param('document') document, @Body() model: Address){
 		try {
 			await this.service.create(document, model, AddressType.Billing);
@@ -27,7 +27,7 @@ export class AddressController {
 	}
 	
 	@Post(':document/shipping')
-	@UseInterceptors(new ValidatorIntercptor(new CreateAddressContract))
+	@UseInterceptors(new ValidatorInterceptor(new CreateAddressContract))
 	async addShippingAddress(@Param('document') document, @Body() model: Address){
 		try {
 			await this.service.create(document, model, AddressType.Shipping);
