@@ -39,13 +39,14 @@ export class OrderController {
 	async post(@Body() model: OrderItemDto[]) {
 		try {
 			const order = new Order();
-			order.customer = '12345678911';
+			order.customer = '12345678911'; // Vem do token (JWT)
 			order.date = new Date();
 			order.number = '1B2D3F5';
 			order.items = [];
 			await this.orderService.post(order);
 
 			for (const item of model) {
+				// Rehidratar
 				const product = await this.productService.getById(item.product);
 				const orderItem = new OrderItem();
 				orderItem.order = order;
