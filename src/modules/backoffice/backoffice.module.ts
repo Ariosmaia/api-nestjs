@@ -7,6 +7,7 @@ import { CustommerService } from './services/customer.service';
 import { CustomerController } from './controllers/customer.controller';
 import { AddressService } from './services/address.service';
 import { PetService } from './services/pet.service';
+import { AddressController } from './controllers/address.controller';
 
 @Module({
 	imports: [MongooseModule.forFeature([
@@ -19,7 +20,10 @@ import { PetService } from './services/pet.service';
 			schema: UserSchema
 		}
 	])],
-	controllers: [CustomerController],
+	controllers: [
+		AddressController,
+		CustomerController
+	],
 	providers: [
 		AccountService, 
 		AddressService,

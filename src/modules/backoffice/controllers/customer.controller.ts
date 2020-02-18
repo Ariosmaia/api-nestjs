@@ -7,8 +7,6 @@ import { AccountService } from "../services/account.service";
 import { User } from "../models/user.model";
 import { CustommerService } from "../services/customer.service";
 import { Customer } from "../models/customer.model";
-import { Address } from "../models/address.model";
-import { CreateAddressContract } from "../contracts/address/create-address.contract";
 import { CreatePetContract } from "../contracts/pet/create-pet.contract";
 import { Pet } from "../models/pet.model";
 import { QueryDto } from "../dtos/query.dto";
@@ -46,33 +44,6 @@ export class CustomerController {
 				'Não foi possível realizar seu cadastro', false, null, error), 
 				HttpStatus.BAD_REQUEST);
 		} 
-	}
-
-	@Post(':document/addresses/billing')
-	@UseInterceptors(new ValidatorIntercptor(new CreateAddressContract))
-	async addBillingAddress(@Param('document') document, @Body() model: Address){
-		try {
-			await this.customerService.addBillingAddress(document, model);
-			return new Result(null, true, model, null);
-		} catch (error) {
-			throw new HttpException(new Result(
-				'Não foi possível adicionar seu endereço', false, null, error), 
-				HttpStatus.BAD_REQUEST)
-		}
-	}
-
-	
-	@Post(':document/addresses/shipping')
-	@UseInterceptors(new ValidatorIntercptor(new CreateAddressContract))
-	async addShippingAddress(@Param('document') document, @Body() model: Address){
-		try {
-			await this.customerService.addShippingAddress(document, model);
-			return new Result(null, true, model, null);
-		} catch (error) {
-			throw new HttpException(new Result(
-				'Não foi possível adicionar seu endereço', false, null, error), 
-				HttpStatus.BAD_REQUEST)
-		}
 	}
 
 	@Post(':document/pets')
