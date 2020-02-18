@@ -8,7 +8,7 @@ import { Pet } from '../models/pet.model';
 import { QueryDto } from '../dtos/query.dto';
 
 @Injectable()
-export class CustommertService {
+export class CustommerService {
 	constructor(@InjectModel("Customer") private readonly model: Model<CustomerDocument>) {}
 
 	async create(data: Customer): Promise<Customer> {

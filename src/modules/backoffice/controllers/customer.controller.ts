@@ -5,7 +5,7 @@ import { CreateCustomerContract } from "../contracts/customer/create-customer.co
 import { CreateCustomerDto } from "../dtos/create-customer.dto";
 import { AccountService } from "../services/account.service";
 import { User } from "../models/user.model";
-import { CustommertService } from "../services/customer.service";
+import { CustommerService } from "../services/customer.service";
 import { Customer } from "../models/customer.model";
 import { Address } from "../models/address.model";
 import { CreateAddressContract } from "../contracts/address/create-address.contract";
@@ -21,7 +21,7 @@ export class CustomerController {
 	
 	constructor(
 		private readonly accountService: AccountService,
-		private readonly customerService: CustommertService
+		private readonly customerService: CustommerService
 		) {}
 
 	// @Body para pegar os dados do que vem na requisão
