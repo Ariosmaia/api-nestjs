@@ -1,17 +1,33 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+
 import { CustomerSchema } from './schemas/customer.schema';
 import { UserSchema } from './schemas/user.schema';
-import { AccountService } from './services/account.service';
-import { CustommerService } from './services/customer.service';
-import { CustomerController } from './controllers/customer.controller';
+
 import { AddressService } from './services/address.service';
+import { AccountService } from './services/account.service';
+import { AuthService } from 'src/shared/services/auth.service';
+import { CustommerService } from './services/customer.service';
 import { PetService } from './services/pet.service';
+import { JwtStrategy } from 'src/shared/strategies/jwt.strategy';
+
+
 import { AddressController } from './controllers/address.controller';
+import { CustomerController } from './controllers/customer.controller';
 import { PetController } from './controllers/pet.controller';
 
 @Module({
-	imports: [MongooseModule.forFeature([
+	imports: [
+		PassportModule.register({defaultStrategy: 'jwt'}),
+		JwtModule.register({
+			secretOrPrivateKey: 'bbc66a6062a9a36f8aac391f3cad0b13',
+			signOptions: {
+				expiresIn: 3600,
+			}
+		}),
+		MongooseModule.forFeature([
 		{
 			name: "Customer",
 			schema: CustomerSchema
@@ -30,7 +46,9 @@ import { PetController } from './controllers/pet.controller';
 		AccountService, 
 		AddressService,
 		CustommerService,
-		PetService, 
+		AuthService,
+		PetService,
+		JwtStrategy 
 	],
 })
 export class BackofficeModule { }
