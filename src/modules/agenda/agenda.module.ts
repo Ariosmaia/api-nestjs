@@ -4,6 +4,7 @@ import { AgendaController } from './controllers/agenda.controller';
 import { RoomBookService } from './services/room-book.service';
 import { RoomRepository } from './repositories/room.repository';
 import { CommandHandler } from './commands/handlers';
+import { EventHandlers } from './events/handlers';
 
 @Module({
 	imports: [CqrsModule],
@@ -11,7 +12,8 @@ import { CommandHandler } from './commands/handlers';
 	providers: [
 		RoomBookService,
 		RoomRepository,
-		...CommandHandler
+		...CommandHandler,
+		...EventHandlers
 	],
 })
 export class AgendaModule {}
