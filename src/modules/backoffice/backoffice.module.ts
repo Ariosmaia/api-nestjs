@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
@@ -22,6 +22,7 @@ import { PetController } from './controllers/pet.controller';
 
 @Module({
 	imports: [
+		CacheModule.register(),
 		PassportModule.register({defaultStrategy: 'jwt'}),
 		JwtModule.register({
 			secret: 'bbc66a6062a9a36f8aac391f3cad0b13',
