@@ -58,7 +58,7 @@ export class AccountController {
             await this.accountService.update(request.user.document, { password: model.newPassword });
             return new Result('Sua senha foi alterada com sucesso!', true, null, null);
         } catch (error) {
-            throw new HttpException(new ResultDto('Não foi possível alterar sua senha', false, null, error), HttpStatus.BAD_REQUEST);
+            throw new HttpException(new Result('Não foi possível alterar sua senha', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
 
