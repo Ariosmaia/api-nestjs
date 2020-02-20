@@ -19,6 +19,10 @@ export class AccountService {
 		return await user.save();
 	}
 
+	async update(username: string, data: any): Promise<User> {
+		return await this.userModel.findOneAndUpdate({ username }, data);
+	}
+
 	async authenticate(username: string, password: string): Promise<Customer> {
 		return await this.customerModel
 			.findOne(

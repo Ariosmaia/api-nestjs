@@ -45,7 +45,7 @@ export class AccountController {
             await this.accountService.update(model.document, { password: password });
             return new Result('Uma nova senha foi enviada para seu E-mail', true, null, null);
         } catch (error) {
-            throw new HttpException(new ResultDto('Não foi possível restaurar sua senha', false, null, error), HttpStatus.BAD_REQUEST);
+            throw new HttpException(new Result('Não foi possível restaurar sua senha', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
 
