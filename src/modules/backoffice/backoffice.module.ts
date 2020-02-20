@@ -23,7 +23,7 @@ import { PetController } from './controllers/pet.controller';
 	imports: [
 		PassportModule.register({defaultStrategy: 'jwt'}),
 		JwtModule.register({
-			secretOrPrivateKey: 'bbc66a6062a9a36f8aac391f3cad0b13',
+			secretOrPrivateKey: process.env.SECRET,
 			signOptions: {
 				expiresIn: 3600,
 			}

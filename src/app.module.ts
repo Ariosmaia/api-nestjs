@@ -1,13 +1,20 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BackofficeModule } from 'src/modules/backoffice/backoffice.module';
+import { ConfigModule } from '@nestjs/config';
+
 import { StoreModule } from 'src/modules/store/store.module';
+
+import { BackofficeModule } from 'src/modules/backoffice/backoffice.module';
 
 // nest generate module backoffice
 @Module({
 	imports: [
-		MongooseModule.forRoot('mongodb://localhost:27017/petshop',
+		ConfigModule.forRoot({
+			envFilePath: '.development.env',
+			isGlobal: true,
+		}),
+		MongooseModule.forRoot(process.env.CONNECTION_STRING,
 			{ useUnifiedTopology: true, useNewUrlParser: true }),
 		TypeOrmModule.forRoot({
 			type: 'mssql',
