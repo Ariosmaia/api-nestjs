@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { StoreModule } from 'src/modules/store/store.module';
 
 import { BackofficeModule } from 'src/modules/backoffice/backoffice.module';
+import { AgendaModule } from './modules/agenda/agenda.module';
 
 // nest generate module backoffice
 @Module({
@@ -27,7 +28,8 @@ import { BackofficeModule } from 'src/modules/backoffice/backoffice.module';
 			synchronize: true,
 		}),
 		BackofficeModule,
-		StoreModule
+		StoreModule,
+		AgendaModule
 	],
 	controllers: [],
 	providers: [],
