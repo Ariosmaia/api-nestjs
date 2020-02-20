@@ -22,6 +22,7 @@
   "dependencies": {
     "@nestjs/common": "^6.10.14",
     "@nestjs/core": "^6.10.14",
+    "@nestjs/jwt": "^6.1.1",
     "@nestjs/mongoose": "^6.3.1",
     "@nestjs/passport": "^6.1.1",
     "@nestjs/platform-express": "^6.10.14",
@@ -30,6 +31,7 @@
     "mssql": "^6.1.0",
     "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
+    "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
