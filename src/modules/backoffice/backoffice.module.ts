@@ -19,11 +19,12 @@ import { AddressController } from './controllers/address.controller';
 import { CustomerController } from './controllers/customer.controller';
 import { PetController } from './controllers/pet.controller';
 
+
 @Module({
 	imports: [
 		PassportModule.register({defaultStrategy: 'jwt'}),
 		JwtModule.register({
-			secretOrPrivateKey: process.env.SECRET,
+			secret: 'bbc66a6062a9a36f8aac391f3cad0b13',
 			signOptions: {
 				expiresIn: 3600,
 			}
@@ -53,4 +54,8 @@ import { PetController } from './controllers/pet.controller';
 		JwtStrategy 
 	],
 })
-export class BackofficeModule { }
+export class BackofficeModule { 
+	constructor(){
+		console.log("modulo", process.env.SECRET_KEY)
+	}
+}
