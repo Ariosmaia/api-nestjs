@@ -14,6 +14,7 @@ import { PetService } from './services/pet.service';
 import { JwtStrategy } from 'src/shared/strategies/jwt.strategy';
 
 
+import { AccountController } from './controllers/account.controller';
 import { AddressController } from './controllers/address.controller';
 import { CustomerController } from './controllers/customer.controller';
 import { PetController } from './controllers/pet.controller';
@@ -38,6 +39,7 @@ import { PetController } from './controllers/pet.controller';
 		}
 	])],
 	controllers: [
+		AccountController,
 		AddressController,
 		CustomerController,
 		PetController
