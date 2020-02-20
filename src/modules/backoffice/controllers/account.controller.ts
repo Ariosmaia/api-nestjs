@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Req, UseInterceptors, Body, HttpException, HttpStatus } from "@nestjs/common";
+import { Controller, UseGuards, Post, Req, Body, HttpException, HttpStatus } from "@nestjs/common";
 import { JwtAuthGuard } from "src/shared/guards/auth.guard";
 import { AuthService } from "src/shared/services/auth.service";
 import { AuthenticateDto } from "../dtos/account/authenticate.dto";
@@ -63,10 +63,11 @@ export class AccountController {
     }
 
     // Refresh Token
-    @Post('refresh')
+		@Post('refresh')
+		@UseGuards(JwtAuthGuard)
     async refreshToken(@Req() request): Promise<any> {
         // Gera o token
-        const token = await this.authService.createToken(request.user.document, request.user.email, request.user.image, request.user.user.roles);
+        const token = await this.authService.createToken(request.user.document, request.user.email, request.user.image, request.user.roles);
         return new Result(null, true, token, null);
     }
 }
