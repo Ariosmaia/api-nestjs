@@ -1,13 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import * as compression from 'compression';
 import {SwaggerModule, DocumentBuilder} from '@nestjs/swagger';
 import { AppModule } from 'src/app.module';
 import { CustomLogger } from './shared/services/custom-logger.service';
+import * as compression from 'compression';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-		logger: new CustomLogger()
-	});
+  const app = await NestFactory.create(AppModule, {logger: new CustomLogger()});
 	app.use(compression());
 
 	// Open API (Swagger)
