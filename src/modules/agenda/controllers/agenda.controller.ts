@@ -5,6 +5,9 @@ import { BookRoomDto } from '../dtos/book-room.dto';
 import { BookRoomCommand } from '../commands/book-room.command';
 import { Result } from 'src/modules/backoffice/models/result.model';
 
+// DTO - dados da tela pra aplicação
+// Command - Executa uma ação
+// Pode acontecer deles serem iguais as vezes
 @Controller('v1/rooms')
 export class AgendaController {
     constructor(private readonly service: RoomBookService) { }
