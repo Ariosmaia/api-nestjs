@@ -1,10 +1,10 @@
 import { Controller, Post, Param, Body, UseInterceptors, HttpException, HttpStatus, Get } from "@nestjs/common";
 import { Result } from "../models/result.model";
-import { ValidatorInterceptor } from "src/shared/interceptors/validator.interceptor";
 import { Address } from "../models/address.model";
 import { CreateAddressContract } from "../contracts/address/create-address.contract";
 import { AddressService } from "../services/address.service";
 import { AddressType } from "../enums/address-type.enum";
+import { ValidatorInterceptor } from "../interceptors/validator.interceptor";
 
 @Controller('v1/addresses')
 export class AddressController {

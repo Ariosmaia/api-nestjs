@@ -7,6 +7,8 @@ import { StoreModule } from 'src/modules/store/store.module';
 
 import { BackofficeModule } from 'src/modules/backoffice/backoffice.module';
 import { AgendaModule } from './modules/agenda/agenda.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { RoleInterceptor } from './shared/interceptors/role.interceptor';
 
 // nest generate module backoffice
 @Module({

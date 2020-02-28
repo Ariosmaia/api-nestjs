@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Param, Body, UseInterceptors, HttpException, HttpStatus, Put, CacheInterceptor } from "@nestjs/common";
 import { Md5 } from 'md5-typescript';
 import { Result } from "../models/result.model";
-import { ValidatorInterceptor } from "src/shared/interceptors/validator.interceptor";
 import { CreateCustomerContract } from "../contracts/customer/create-customer.contract";
 import { CreateCustomerDto } from "../dtos/customer/create-customer.dto";
 import { AccountService } from "../services/account.service";
@@ -14,6 +13,7 @@ import { UpdateCustomerDto } from "../dtos/customer/update-customer.dto";
 import { CreateCreditCardContract } from "../contracts/customer/create-credit-card.contract";
 import { CreditCard } from "../models/credit-card.model";
 import { QueryContract } from "../contracts/query.contract";
+import { ValidatorInterceptor } from "../interceptors/validator.interceptor";
 
 //nest generate controller customer
 // localhost:3000/v1/customers
